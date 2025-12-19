@@ -6,7 +6,7 @@ int main()
 {
     int coefficients[5];
     int i;
-    int sum = 0, x = 2;
+    int sum = 0, x;
 
     printf("\nEnter %d coefficient: ", DEGREE+1);
     for(i = 0; i <= DEGREE; i++)
@@ -15,7 +15,9 @@ int main()
         scanf("%d", &coefficients[i]);
     }
 
-    // printf()
+    printf("\nEnter the value of x:");
+    scanf("%d", &x);
+    
     for(i = 0; i <= DEGREE; i++)
     {
         sum += coefficients[i] * (int) pow(x, i);
