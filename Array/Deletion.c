@@ -2,32 +2,32 @@
 
 int main()
 {
-    int arr[100], n, pos, i;
+    int arr[100], num, pos, i;
 
     printf("Enter number of elements: ");
-    scanf("%d", &n);
+    scanf("%d", &num);
 
     printf("Enter elements:\n");
-    for(i = 0; i < n; i++)
+    for(i = 0; i < num; i++)
         scanf("%d", &arr[i]);
 
-    printf("Enter position to delete (1 to %d): ", n);
+    printf("Enter position to delete (1 to %d): ", num);
     scanf("%d", &pos);
 
-    if(pos < 1 || pos > n)
+    if(pos < 1 || pos > num)
     {
         printf("Invalid position");
         return 1;
     }
 
     // shift elements left
-    for(i = pos - 1; i < n - 1; i++)
+    for(i = pos - 1; i < num - 1; i++)
         arr[i] = arr[i + 1];
 
-    n--;
+    num--;
 
     printf("Array after deletion:\n");
-    for(i = 0; i < n; i++)
+    for(i = 0; i < num; i++)
         printf("%d ", arr[i]);
 
     return 0;
