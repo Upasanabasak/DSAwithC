@@ -21,15 +21,20 @@ int main()
 	{
 		printf("%d ",arr[i]);
 	}
-	
-	for(i = 0; i < num; i++)
+	//Before sorting: 2 34 65  9 68
+    // Bubble Sort
+	for(i = 0; i < num-1; i++)  //  number of passes ||  i = 1
 	{
-		if(arr[i] > arr[i + 1])
+        for ( int j = 0 ; j< num-i-1; j++) // comparison in each pass || j = 4
+        {
+		if(arr[j] > arr[j + 1]) // 
 		{
-			temp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = temp;	
+			temp = arr[j]; // temp = 68
+			arr[j] = arr[j + 1]; // 9
+			arr[j + 1] = temp;	 // 68
 		}
+
+        }
 	}
 	
 	printf("\n-----------------------------------------");
