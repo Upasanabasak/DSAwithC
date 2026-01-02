@@ -77,8 +77,8 @@ int main ()
     
     if (k == 1)
     {
-    temp -> ptr = head;
-    head = temp;
+        temp -> ptr = head;
+        head = temp;
     }
 
     // 10 20 30 40
@@ -90,12 +90,11 @@ int main ()
             p = p->ptr; // p moves one node ahead // p =20
         }
     
-        if(p != NULL){      //
+        if(p != NULL)
+        {      //
             temp->ptr= p->ptr;  // 
             p->ptr = temp;
-
         }
-
     }
 
     display(head);
