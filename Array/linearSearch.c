@@ -21,11 +21,14 @@ int main()
 	for(i = 0; i < num; i++)
 	{
 		if(arr[i] == key)
+		{
 			flag = 1;
+			break;
+		}
 	}
 	
 	if(flag == 1)
-		printf("\n%d is found at %d position.", key, i);
+		printf("\n%d is found at %d position.", key, i + 1);
 	else
 		printf("\n%d is not found.", key);
 	return 0;
