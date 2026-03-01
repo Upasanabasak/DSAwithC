@@ -50,11 +50,50 @@ struct Node* create()
 
 struct Node* insertAtPosition()
 {
-    int val, pos;
+    int val, pos, i;
+    struct Node* newNode = NULL;
+    struct Node* head = NULL;
+    struct Node* temp = NULL;
+
     printf("\nEnter the the position: ");
     scanf("%d", &pos);
+    if(pos < 1)
+    {
+        printf("Invalid position.\n");
+        return head;
+    }
     printf("\nEnter the value: ");
     scanf("%d", &val);
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+    if(newNode == NULL)
+    {
+        printf("\nMemory is not available.");
+        exit(1);
+    }
+    newNode->data = val;
+    newNode->next = NULL;
+    newNode->previous = NULL;
+    if(pos == 1)
+    {
+        newNode->next = head;
+        if(head != NULL)
+            head->previous = newNode;
+        head = newNode;
+        return head;
+
+        for(i = 1; temp != NULL && i < pos; i++)
+            temp = temp->next;
+        
+        if(temp == NULL)
+        {
+            printf("Insertion is not possible.");
+            free(newNode);
+            return head;
+        }
+        newNode->next = temp->next;
+        newNode->previous = temp;
+        return head;
+    }
 }
 
 int display(struct Node* head)
@@ -63,7 +102,7 @@ int display(struct Node* head)
     temp = head;
     while(temp != NULL)
     {
-        printf("%d ->", temp->data);
+        printf("%d <->", temp->data);
         temp = temp->next;
     }
     printf("NULL");
@@ -86,7 +125,7 @@ int main()
                     insertAtPosition();
                     break;
             case 2: 
-                    dispaly();
+                    display(head);
                     break;
             case 3:
                     printf("\nExiting...");
