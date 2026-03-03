@@ -10,14 +10,10 @@
 
 int arr[20], i;
 
-void secondLargest()
+void secondLargest(int arr[], int num)
 {
-    int num;
     int largest = INT_MIN;
     int secondLargest = INT_MIN;
-
-    printf("Enter number of elements: ");
-    scanf("%d", &num);
 
     if (num < 2)
     {
@@ -25,11 +21,6 @@ void secondLargest()
         return 0;
     }
 
-    printf("Enter elements:\n");
-    for (int i = 0; i < num; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
     // 4 23 55 289 50
 
     for (int i = 0; i < num; i++)
@@ -88,7 +79,7 @@ int main()
         switch (choice)
         {
         case 1:
-            secondLargest();
+            secondLargest(arr, n);
             break;
         case 2:
             reverseOrder(arr, n);
