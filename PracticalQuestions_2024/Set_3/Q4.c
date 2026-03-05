@@ -1,5 +1,5 @@
-/* 
-Write a menu driven program in C to perform the following operations in a Stack using linked list with the node 
+/*
+Write a menu driven program in C to perform the following operations in a Stack using linked list with the node
 structure (Roll, Name, Next):
     (a) Push
     (b) Pop
@@ -11,65 +11,80 @@ structure (Roll, Name, Next):
 #include <stdlib.h>
 #include <string.h>
 
-struct Node 
+struct Node
 {
     int rollNo;
     char name[30];
-    struct Node* next;
+    struct Node *next;
 };
 
-struct Node* head = NULL;
-struct Node* temp = NULL;
+struct Node *head = NULL;
 
 void push()
 {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    if(newNode == NULL)
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    if (newNode == NULL)
     {
-        printf("\nMemory is no available.");
+        printf("\nMemory not available.");
         return;
     }
-    printf("\nEnter the Roll Number: ");
+    printf("Enter Roll Number: ");
     scanf("%d", &newNode->rollNo);
-    printf("\nEnter your name: ");
-    scanf("%s", &newNode->name);
+    printf("Enter Name: ");
+    scanf("%s", newNode->name); // Removed &
+
     newNode->next = head;
     head = newNode;
-    printf("\nNode Pushed Successfully.");
+    printf("Node Pushed Successfully.\n");
 }
 
 void pop()
 {
-    if(head == NULL)
+    if (head == NULL)
     {
-        printf("\nStack Underflow.");
+        printf("\nStack Underflow.\n");
         return;
     }
-    temp = head;
-    printf("\nDeleted Record -> Roll No: %d, Name: %s", temp->rollNo, temp->name);
-
+    struct Node *temp = head;
+    printf("\nPopped -> Roll: %d, Name: %s\n", temp->rollNo, temp->name);
     head = head->next;
     free(temp);
 }
 
 void display()
 {
-    if(head == NULL)
-        printf("\nStack is Empty.");
-    temp = head;
-    printf("\n\nStack Elements:\n");
-    printf("\nRoll No.\tName");
-    printf("\n-------------------------");
-    while(temp != NULL)
-        {
-            printf("\n| %d\t\t%s |", temp->rollNo, temp->name);
-            temp = temp->next;
-        }
-   }
+    if (head == NULL)
+    {
+        printf("\nStack is Empty.\n");
+        return; // Added return
+    }
+    struct Node *temp = head;
+    printf("\nStack Elements:\nRoll No.\tName\n-------------------------");
+    while (temp != NULL)
+    {
+        printf("\n| %d\t\t%s |", temp->rollNo, temp->name);
+        temp = temp->next;
+    }
+    printf("\n");
+}
 
 void reverse()
 {
-    printf("\nHi");
+    if (head == NULL || head->next == NULL)
+    {
+        printf("\nStack reversed (or too short to change).\n");
+        return;
+    }
+    struct Node *prev = NULL, *current = head, *next = NULL;
+    while (current != NULL)
+    {
+        next = current->next; // Store next
+        current->next = prev; // Reverse pointer
+        prev = current;       // Move prev forward
+        current = next;       // Move current forward
+    }
+    head = prev;
+    printf("\nStack Reversed Successfully.\n");
 }
 
 int main()
@@ -77,30 +92,30 @@ int main()
     int choice;
     do
     {
-        printf("\n\t\t\t---Menu---");
-        printf("\n1.Push\n2.Pop\n3.Display\n4.Reverse\n5.Exit");
-        printf("\nEnter the choice: ");
-        scanf("%d", &choice);
-        switch(choice)
+        printf("\n---Menu---\n1.Push\n2.Pop\n3.Display\n4.Reverse\n5.Exit\nChoice: ");
+        if (scanf("%d", &choice) != 1)
+            break; // Basic input validation
+
+        switch (choice)
         {
-            case 1:
-                    push();
-                    break;
-            case 2:
-                    pop();
-                    break;
-            case 3:
-                    display();
-                    break;
-            case 4:
-                    reverse();
-                    break;
-            case 5:
-                    printf("\nExiting...");
-                    break;
-            default:
-                    printf("\nInvalid Number!\nEnter correct number(1-5).");
+        case 1:
+            push();
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            reverse();
+            break;
+        case 5:
+            printf("Exiting...\n");
+            break;
+        default:
+            printf("Invalid choice!\n");
         }
-    }while(choice != 5);
+    } while (choice != 5);
     return 0;
 }
